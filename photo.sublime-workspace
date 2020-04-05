@@ -11,7 +11,7 @@
 			"file": "jpg.py",
 			"settings":
 			{
-				"buffer_size": 3337,
+				"buffer_size": 5316,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -20,16 +20,16 @@
 			"file": "photo.sublime-project",
 			"settings":
 			{
-				"buffer_size": 380,
+				"buffer_size": 428,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/Vasyl/AppData/Roaming/Sublime Text 3/Packages/Anaconda/README.md",
+			"file": "photo.sublime-workspace",
 			"settings":
 			{
-				"buffer_size": 6749,
+				"buffer_size": 4461,
 				"line_ending": "Unix"
 			}
 		}
@@ -75,16 +75,17 @@
 	},
 	"expanded_folders":
 	[
-		"/E/photo"
+		"/D/photo"
 	],
 	"file_history":
 	[
+		"/C/Users/Vasyl/AppData/Roaming/Sublime Text 3/Packages/Anaconda/README.md",
 		"/C/Users/Vasyl/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
 		"/C/Users/Vasyl/AppData/Roaming/Sublime Text 3/Packages/User/Python.sublime-settings"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -125,15 +126,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3337,
+						"buffer_size": 5316,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2779,
-								2779
+								4678,
+								4678
 							]
 						],
 						"settings":
@@ -142,7 +143,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1292.0,
+						"translation.y": 1800.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -154,15 +155,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 380,
+						"buffer_size": 428,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								373,
-								341
+								260,
+								260
 							]
 						],
 						"settings":
@@ -179,27 +180,28 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/C/Users/Vasyl/AppData/Roaming/Sublime Text 3/Packages/Anaconda/README.md",
+					"file": "photo.sublime-workspace",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6749,
+						"buffer_size": 4461,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								558,
-								558
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 216.0,
+						"translation.y": 990.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -210,7 +212,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 24.0
 	},
 	"input":
 	{
@@ -241,7 +243,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 388.0
+		"height": 340.0
 	},
 	"output.find_results":
 	{
@@ -251,7 +253,7 @@
 	"project": "photo.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
