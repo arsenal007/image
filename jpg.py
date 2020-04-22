@@ -6,12 +6,21 @@ import datetime
 import glob
 import filecmp
 import piexif
+import errno
+import os
+import stat
+import shutil
 
-dirName = "..\\work"
+
+#dirName = "E:\\tmp\\Pictures"
+dirName = "..\work"
+
+
+
 
 
 extensions = ["jpg", "JPG", "mp4", "MP4", "3gp", "MOV", "3GP", "avi", "wmv",
-              "WMV", "jpeg", "JPEG", "MOD", "mov", "tiff", "TIFF", "NEF", "png", "gif", "AVI"]
+              "WMV", "jpeg", "JPEG", "MOD", "mov", "tiff", "TIFF", "NEF", "png", "gif", "GIF", "AVI","MPG","mpg"]
 
 
 def get_minimum_creation_time(exif_data):
@@ -76,32 +85,61 @@ def exif(file):
     #l = len(dict)
     return (True)
 
+
 def get_ext(name):
     base, ext = os.path.splitext(name)
     return ext[1:]
 
+
 def is_ext(name, ext):
-	return get_ext(name)==ext
+    return get_ext(name) == ext
+
 
 '''
     For the given path, get the List of all files in the directory tree 
 '''
+
+
 def getListOfFiles(dirName, ext):
-    # create a list of file and sub directories 
-    # names in the given directory 
+    # create a list of file and sub directories
+    # names in the given directory
     listOfFile = os.listdir(dirName)
     allFiles = []
     # Iterate over all the entries
     for entry in listOfFile:
         # Create full path
         fullPath = os.path.join(dirName, entry)
-        # If entry is a directory then get the list of files in this directory 
+        # If entry is a directory then get the list of files in this directory
         if os.path.isdir(fullPath):
             allFiles = allFiles + getListOfFiles(fullPath, ext)
-        elif is_ext(entry,ext):
-        	allFiles.append(fullPath)
-                
+        elif is_ext(entry, ext):
+            allFiles.append(fullPath)
+
     return allFiles
+
+
+def handleRemoveReadonly(func, path, exc):
+    excvalue = exc[1]
+    if func in (os.rmdir) and excvalue.errno == errno.EACCES:
+        os.chmod(path, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)  # 0777
+        func(path)
+    else:
+        raise
+
+
+def clean(dirr):
+    dirContents = os.listdir(dirr)
+    if not os.access(dirr, os.W_OK):
+        os.chmod(dirr, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+
+    if len(dirContents) == 0:
+        # os.remove(dirr)
+        shutil.rmtree(dirr, ignore_errors=False, onerror=handleRemoveReadonly)
+    else:
+        for f in dirContents:
+            fullPath = os.path.join(dirr, f)
+            if os.path.isdir(fullPath):
+                clean(fullPath)
 
 
 def ren(file, ext):
@@ -141,10 +179,17 @@ def ren(file, ext):
     except OSError:
         new_time = modtime
     except:
-    	new_time = modtime
-    	img_file.close()
+        new_time = modtime
+        img_file.close()
     rename(new_time, file, ext)
     return
+
+#==============================================
+# fix
+# input: filename with arbitrarery extension
+# output: filename with lower case extension
+# example 1.JPG -> 1.jpg
+#==============================================
 
 
 def fix(name):
@@ -152,18 +197,18 @@ def fix(name):
     return base + ext.lower()
 
 
-
-
 if __name__ == "__main__":
-	fse = sys.getfilesystemencoding()
+    fse = sys.getfilesystemencoding()
 
-	for ext in extensions:
-		list = getListOfFiles(dirName, ext)
-		for file in list:
-			head, teil = os.path.split(file)
-			move_to = fix(teil)
-			print(file.encode(fse),move_to.encode(fse), sep=' -> ', end=' [', file=sys.stdout, flush=False)
-			os.replace(file.encode(fse), move_to.encode(fse))
-			new_ext = get_ext(move_to.encode(fse))
-			ren(move_to.encode(fse), new_ext.decode("utf-8"))
-	input("Press Enter to continue...")
+    for ext in extensions:
+        list = getListOfFiles(dirName, ext)
+        for file in list:
+            head, teil = os.path.split(file)
+            move_to = fix(teil)
+            print(file.encode(fse), move_to.encode(fse), sep=' -> ',
+                  end=' [', file=sys.stdout, flush=False)
+            shutil.move(file.encode(fse), move_to.encode(fse))
+            new_ext = get_ext(move_to.encode(fse))
+            ren(move_to.encode(fse), new_ext.decode("utf-8"))
+    clean(dirName)
+    #input("Press Enter to continue...")
